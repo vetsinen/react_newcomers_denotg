@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "start": "deno run --allow-env --allow-read -allow-net bot.ts"
+  },
+  "version": "0.1.0"
+}
