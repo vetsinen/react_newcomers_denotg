@@ -15,11 +15,31 @@ bot.on("message:new_chat_members", async (ctx) => {
      // Extract the new members
      const message = ctx.message;
      console.log(message.chat.id)
-     console.log(message.new_chat_participant.id)
+     const userid: number = message.new_chat_participant.id
+     const chatid: number = message.chat.id
+     console.log(userid)
      console.log(message)
-     await ctx.api.sendMessage(message.chat.id, `Hello, ${message.new_chat_participant.first_name}. welcome to chat`);
+     await ctx.api.sendMessage(chatid, `Hello, ${message.new_chat_participant.first_name}. welcome to chat`);
 
-     // Mute the target user
+     //Mute the target user
+     const muteDurationSeconds = 60 * 240;
+     // Calculate the mute end time as a Unix timestamp
+     const untilDate = Math.floor(Date.now() / 1000) + muteDurationSeconds
+
+     await ctx.api.restrictChatMember(chatid, userid, {
+          permissions: {
+               can_send_messages: false, // Disable sending messages
+               can_send_media_messages: false,
+               can_send_polls: false,
+               can_send_other_messages: false,
+               can_add_web_page_previews: false,
+               can_change_info: false,
+               can_invite_users: false,
+               can_pin_messages: false,
+          },
+          until_date: untilDate,
+     })
+
      // await bot.restrictChatMember(chatId, targetUserId, {
      //      until_date: Date.now() + 60 * 60 * 24 * 365, // Mute for a year
      // });
