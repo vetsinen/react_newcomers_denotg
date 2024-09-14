@@ -19,7 +19,7 @@ bot.on("message:new_chat_members", async (ctx) => {
      const chatid: number = message.chat.id
      console.log(userid)
      console.log(message)
-     await ctx.api.sendMessage(chatid, `Hello, ${message.new_chat_participant.first_name}. welcome to chat`);
+     await ctx.api.sendMessage(chatid, `доброго дня, ${message.new_chat_participant.first_name}. через велику кількість спам-акаунтів в телеграмі нові акаунти в цьому чату переводяться в режим тільки читання на 3 дні. якщо ви жива людина - напишіть в приват боту і обмеження будуть зняті`);
 
      //Mute the target user
      const muteDurationSeconds = 60 * 240;
